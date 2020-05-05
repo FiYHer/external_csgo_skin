@@ -133,7 +133,7 @@ void __cdecl change_skin_thread(void* data)
 		while(model_index == 0) model_index = get_model_index(knife_model);
 
 		unsigned int knife_skin = g_info.knife_skin_index;
-		for (unsigned int i = 0; i < 8; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			dword current_weapon = (dword)read_memory(local_player + g_info.my_weapons_address + (i * 0x4), nullptr, sizeof(dword)) & 0xfff;
 			current_weapon = (dword)read_memory(g_info.entity_list_address + (current_weapon - 1) * 0x10, nullptr, sizeof(dword));
@@ -141,7 +141,7 @@ void __cdecl change_skin_thread(void* data)
 
 			short weapon_index = (short)read_memory(current_weapon + g_info.item_definition_index_address, nullptr, sizeof(short));
 			unsigned int main_weapon_skin = g_info.main_weapon_skin_index;
-			//unsigned int secondary_weapon_skin = g_info.secondary_weapon_skin_index;
+			unsigned int secondary_weapon_skin = g_info.secondary_weapon_skin_index;
 
 			if (weapon_index == WEAPON_KNIFE
 				|| weapon_index == WEAPON_KNIFE_T
@@ -154,6 +154,7 @@ void __cdecl change_skin_thread(void* data)
 				main_weapon_skin = knife_skin;
 			}
 
+			if (is_secondary_weapon(weapon_index)) main_weapon_skin = secondary_weapon_skin;
 			if (main_weapon_skin)
 			{
 				write_memory(current_weapon + g_info.item_id_high_address, &item_id_high, sizeof(int));

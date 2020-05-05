@@ -152,7 +152,15 @@ void initialize_controls(hwnd window_hwnd)
 		400, 50, 185, 300, window_hwnd, (HMENU)listbox_skin_info_id, 0, 0);
 	SendMessageA(g_info.listbox_skin_info, WM_SETFONT, (wparam)g_info.font, 1);
 
-	hwnd text1 = CreateWindowA("Static", "玩家死亡后武器皮肤才开始更新...", style | SS_CENTER,
-		0, 350, 600, 20, window_hwnd, 0, 0, 0);
+	hwnd text1 = CreateWindowA("Static", "玩家死亡后武器皮肤才开始更新...", WS_VISIBLE | WS_CHILD | SS_CENTER ,
+		0, 340, 600, 20, window_hwnd, 0, 0, 0);
 	SendMessageA(text1, WM_SETFONT, (wparam)g_info.font, 1);
+
+	hwnd text2 = CreateWindowA("Static", "死亡后武器皮肤又复原了?小bug,再死一次应该就好了...", WS_VISIBLE | WS_CHILD | SS_CENTER,
+		0, 365, 600, 20, window_hwnd, 0, 0, 0);
+	SendMessageA(text2, WM_SETFONT, (wparam)g_info.font, 1);
+
+	hwnd text3 = CreateWindowA("Static", "修改完后,还要再按一次[修改皮肤]才会生效...", WS_VISIBLE | WS_CHILD | SS_CENTER,
+		0, 390, 600, 20, window_hwnd, 0, 0, 0);
+	SendMessageA(text3, WM_SETFONT, (wparam)g_info.font, 1);
 }
