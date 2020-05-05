@@ -1026,10 +1026,10 @@ struct common_info
 	dword my_weapons_address;
 	dword model_index_address;
 
-	dword knife_model_index;
-	dword knife_skin_index;
-	dword main_weapon_skin_index;
-	dword secondary_weapon_skin_index;
+	unsigned int knife_model_index;
+	unsigned int knife_skin_index;
+	unsigned int main_weapon_skin_index;
+	unsigned int secondary_weapon_skin_index;
 
 
 };

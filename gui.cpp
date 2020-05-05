@@ -119,6 +119,7 @@ void initialize_controls(hwnd window_hwnd)
 	g_info.edit_knife_skin = CreateWindowA("Edit", nullptr, style,
 		280, 120 - 4, 100, 23, window_hwnd, (HMENU)edit_knife_skin_id, 0, 0);
 	SendMessageA(g_info.edit_knife_skin, WM_SETFONT, (wparam)g_info.font, 1);
+	SetWindowTextA(g_info.edit_knife_skin, "559");
 
 	g_info.text_main_weapon_skin = CreateWindowA("Static", "主武器", style & ~WS_BORDER,
 		210, 170, 70, 20, window_hwnd, 0, 0, 0);
@@ -127,6 +128,7 @@ void initialize_controls(hwnd window_hwnd)
 	g_info.edit_main_weapon_skin = CreateWindowA("Edit", nullptr, style,
 		280, 170 - 4, 100, 23, window_hwnd, (HMENU)edit_main_weapon_skin_id, 0, 0);
 	SendMessageA(g_info.edit_main_weapon_skin, WM_SETFONT, (wparam)g_info.font, 1);
+	SetWindowTextA(g_info.edit_main_weapon_skin, "344");
 
 	g_info.text_secondary_weapon_skin = CreateWindowA("Static", "副武器", style & ~WS_BORDER,
 		210, 210, 70, 20, window_hwnd, 0, 0, 0);
@@ -135,6 +137,7 @@ void initialize_controls(hwnd window_hwnd)
 	g_info.edit_secondary_weapon_skin = CreateWindowA("Edit", nullptr, style,
 		280, 210 - 4, 100, 23, window_hwnd, (HMENU)edit_secondary_weapon_skin_id, 0, 0);
 	SendMessageA(g_info.edit_secondary_weapon_skin, WM_SETFONT, (wparam)g_info.font, 1);
+	SetWindowTextA(g_info.edit_secondary_weapon_skin, "437");
 
 	g_info.button_stop_change_thread = CreateWindowA("Button", "我不想换肤了", style | BS_PUSHBOX | BS_CENTER,
 		200, 274, 200, 50, window_hwnd, (HMENU)button_stop_change_thread_id, 0, 0);

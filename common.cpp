@@ -99,42 +99,50 @@ bool is_knife(int i)
 void __cdecl change_skin_thread(void* data)
 {
 	g_info.skin_changing = true;
+	MessageBoxA(g_info.window_hwnd, "换肤线程开启", nullptr, 0);
 
 	const int item_id_high = -1;
 	const int entity_quality = 3;
 	const float fallback_wear = 0.0001f;
 
+	unsigned int last_knife_model_index = g_info.knife_model_index;
 	unsigned int model_index = 0;
 	dword local_player = 0;
 
 	while (g_info.skin_changing)
 	{
 		dword temp_player = (dword)read_memory(g_info.local_player_address, nullptr, sizeof(dword));
-		if (temp_player == 0)
+		if (temp_player == 0)//第一次
 		{
 			model_index = 0;
 			continue;
 		}
-		else if (temp_player != local_player)
+		else if (temp_player != local_player)//另一局
 		{
 			local_player = temp_player;
 			model_index = 0;
 		}
 
-		short knife_model = WEAPON_KNIFE_KARAMBIT;//knife_model_ids[g_info.knife_model_index];
-		while (model_index == 0) model_index = get_model_index(knife_model);
+		if (last_knife_model_index != g_info.knife_model_index)
+		{
+			last_knife_model_index = g_info.knife_model_index;
+			model_index = 0;
+		}
 
-		unsigned int knife_skin = 394;
+		short knife_model = knife_model_ids[g_info.knife_model_index];
+		while(model_index == 0) model_index = get_model_index(knife_model);
+
+		unsigned int knife_skin = g_info.knife_skin_index;
 		for (unsigned int i = 0; i < 8; i++)
 		{
 			dword current_weapon = (dword)read_memory(local_player + g_info.my_weapons_address + (i * 0x4), nullptr, sizeof(dword)) & 0xfff;
 			current_weapon = (dword)read_memory(g_info.entity_list_address + (current_weapon - 1) * 0x10, nullptr, sizeof(dword));
-			if(current_weapon == 0) continue;
-		
+			if (current_weapon == 0) continue;
+
 			short weapon_index = (short)read_memory(current_weapon + g_info.item_definition_index_address, nullptr, sizeof(short));
-			unsigned int main_weapon_skin = 885;
+			unsigned int main_weapon_skin = g_info.main_weapon_skin_index;
 			//unsigned int secondary_weapon_skin = g_info.secondary_weapon_skin_index;
-			 
+
 			if (weapon_index == WEAPON_KNIFE
 				|| weapon_index == WEAPON_KNIFE_T
 				|| weapon_index == knife_model)
@@ -166,11 +174,13 @@ void __cdecl change_skin_thread(void* data)
 		if (active_view_model == 0) continue;
 
 		write_memory(active_view_model + g_info.model_index_address, &model_index, sizeof(unsigned int));
+
 	}
 
 	MessageBoxA(nullptr, "换肤线程退出", nullptr, 0);
 	g_info.skin_changing = false;
 }
+
 
 bool is_secondary_weapon(short index)
 {
