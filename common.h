@@ -1111,13 +1111,3 @@ dword scan_table(dword table_address, const char* var_name, dword level);
 
 dword find_netvar(dword start, const char* class_name, const char* netvar_name);
 
-
-
-
-
-
-
-
-
-
-

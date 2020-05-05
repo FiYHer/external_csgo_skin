@@ -182,7 +182,6 @@ void __cdecl change_skin_thread(void* data)
 	g_info.skin_changing = false;
 }
 
-
 bool is_secondary_weapon(short index)
 {
 	switch (index)
@@ -726,13 +725,3 @@ dword find_netvar(dword start, const char* class_name, const char* netvar_name)
 	}
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-

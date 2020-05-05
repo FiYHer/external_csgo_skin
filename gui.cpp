@@ -65,6 +65,7 @@ void create_and_display()
 
 	ShowWindow(g_info.window_hwnd, SW_SHOW);
 	UpdateWindow(g_info.window_hwnd);
+	SetWindowTextA(g_info.window_hwnd, "CSGOÍâ²¿ÎäÆ÷»»·ô³ÌÐò");
 }
 
 void msg_handle()

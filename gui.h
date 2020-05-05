@@ -10,13 +10,3 @@ void msg_handle();
 void create_font();
 
 void initialize_controls(hwnd window_hwnd);
-
-
-
-
-
-
-
-
-
-
